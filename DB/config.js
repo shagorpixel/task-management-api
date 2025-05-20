@@ -2,25 +2,14 @@ const mongoose = require('mongoose');
 require('dotenv').config();
 
 const DB_URL = process.env.DB_URL;
-const port = process.env.PORT || 3000;
+const port = process.env.PORT;
 
-let isConnected;
-
-const connectDB = async () => {
-  if (isConnected) return; // আগেই কানেক্টেড হলে আবার না
-
-  try {
-    const conn = await mongoose.connect(DB_URL, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-      serverSelectionTimeoutMS: 20000, // ⏱️ বেশি টাইম দাও
-    });
-
-    isConnected = conn.connections[0].readyState;
-    console.log('✅ MongoDB Connected Successfully');
-  } catch (error) {
-    console.log('❌ DB Connection Error:', error.message);
-  }
-};
-
-module.exports = { connectDB, port };
+const connectDB = async ()=>{
+    try{
+        await mongoose.connect(DB_URL);
+        console.log('Database Connected Successfully');
+    }catch(error){
+        console.log(error.message);
+    }
+}
+module.exports = { connectDB,port };
