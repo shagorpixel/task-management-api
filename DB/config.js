@@ -7,13 +7,13 @@ const port = process.env.PORT || 3000;
 let isConnected;
 
 const connectDB = async () => {
-  if (isConnected) return; // আগেই কানেক্টেড হলে আবার না
+  if (isConnected) return; 
 
   try {
     const conn = await mongoose.connect(DB_URL, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
-      serverSelectionTimeoutMS: 20000, // ⏱️ বেশি টাইম দাও
+      serverSelectionTimeoutMS: 20000, 
     });
 
     isConnected = conn.connections[0].readyState;
